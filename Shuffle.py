@@ -42,30 +42,35 @@ def Menu_inicial(screen):
          if mb[0] == True:
              level = 2
              teste1.game(screen, level)
+             main()
     
      elif 490 < x_m < 790 and 470 < y_m < 520:
          pygame.draw.rect(screen, (255,0,0), (490, 470, 300, 50), 6)
          if mb[0] == True:
              level = 3
              teste1.game(screen, level)
+             main()
 
      elif 490 < x_m < 790 and 530 < y_m < 580:
          pygame.draw.rect(screen, (255,0,0), (490, 530, 300, 50), 6)
          if mb[0] == True:
              level = 4
              teste1.game(screen, level)
+             main()
     
      elif 490 < x_m < 790 and 590 < y_m < 640:
          pygame.draw.rect(screen, (255,0,0), (490, 590, 300, 50), 6)
          if mb[0] == True:
              level = 5
              teste1.game(screen, level)
+             main()
     
      elif 490 < x_m < 790 and 650 < y_m < 700:
          pygame.draw.rect(screen, (255,0,0), (490, 650, 300, 50), 6)
          if mb[0] == True:
              level = 6
              teste1.game(screen, level)
+             main()
     
      elif 50 < x_m < 350 and 720 < y_m < 770:
          pygame.draw.rect(screen, (255,0,0), (50, 720, 300, 50), 6)
