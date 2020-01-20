@@ -14,6 +14,7 @@ class Levels_gameplay:
      jogo_i = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18]
      ver = []
      score = 0
+     penalty = 0
 
      if level == 1:
          while m < 12:
@@ -42,6 +43,10 @@ class Levels_gameplay:
      for i in range(0, m + 1):
          random.shuffle(jogo)
      Set_t = set()
+     pygame.time.wait(200)
+     image = pygame.image.load("WRONG.png")
+     image_1 = pygame.image.load("WRIGHT.png")
+     image_win = pygame.image.load("Finished.png")
      while (True):
         for event in pygame.event.get():
             if (event.type == pygame.QUIT):
@@ -68,7 +73,6 @@ class Levels_gameplay:
                         pygame.draw.rect(screen, (255,0,0), (x + 70, y + 60, 80, 120), 3)
                         if mb[0] == True:
                            clicked[i] = True
-                           pygame.time.wait(100)
     
                     if (clicked[i]):
                         if jogo[i] == 1:
@@ -288,6 +292,12 @@ class Levels_gameplay:
                             pygame.draw.rect(screen, (0,0,255), (x, y, 70, 105), 0)
                         elif jogo[i] == 15:
                             pygame.draw.rect(screen, (0,0,150), (x, y, 70, 105), 0)
+                        elif jogo[i] == 16:
+                            pygame.draw.rect(screen, (255,150,0), (x, y, 70, 105), 0)
+                        elif jogo[i] == 17:
+                            pygame.draw.rect(screen, (250,200,20), (x, y, 70, 105), 0)
+                        elif jogo[i] == 18:
+                            pygame.draw.rect(screen, (250,110,180), (x, y, 70, 105), 0)
                 i += 1
                 if i == 6 or i == 12 or i == 18 or i == 24 or i == 30:
                     x = 420 
@@ -306,23 +316,6 @@ class Levels_gameplay:
                         ver.append(j)
                     j += 1
             j += 1
-        if len(ver) <= 2:
-            ver.clear() 
-        elif ver[0] != ver[2]:
-            clicked = [False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,
-            False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False]
-            pygame.time.wait(100)
-            print(ver)
-            ver.clear()
-        elif ver[0] == ver[2]:
-            Set_t.add(ver[1])
-            Set_t.add(ver[3])
-            clicked = [False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,
-            False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False]
-            pygame.time.wait(100)
-            score += 100
-            print(ver)
-            ver.clear()
         pygame.draw.rect(screen, (150,0,0), (50, 720, 300, 50), 6)
         my_font.render_to(screen, (175, 735), "EXIT", (128,53,0))
 
@@ -332,4 +325,35 @@ class Levels_gameplay:
             pygame.draw.rect(screen, (255,0,0), (50, 720, 300, 50), 6)
             if mb[0] == True:
                 return 0
+        
+            
+        if len(ver) <= 2:
+            ver.clear() 
+        elif ver[0] != ver[2]:
+            clicked = [False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,
+            False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False]
+            screen.blit(image, (-350,0))
+            pygame.display.flip()
+            pygame.time.wait(1000)
+            if score > 0 and penalty <= score:
+                score -= penalty
+            elif score > 0 and penalty > score:
+                score = 0
+            penalty += 20
+            ver.clear()
+        elif ver[0] == ver[2]:
+            Set_t.add(ver[1])
+            Set_t.add(ver[3])
+            clicked = [False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,
+            False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False]
+            screen.blit(image_1, (-350,0))
+            pygame.display.flip()
+            pygame.time.wait(1000)
+            score += 100
+            penalty = 0
+            ver.clear()
+        
+        if len(Set_t) == len(jogo):
+            screen.blit(image_win, (250,100))
+    
         pygame.display.flip()

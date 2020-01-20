@@ -83,6 +83,7 @@ def main():
 
     res = (1280, 800)
     screen = pygame.display.set_mode(res)
+    image = pygame.image.load("Title_shufle_1.png")
     while (True):
         for event in pygame.event.get():
             if (event.type == pygame.QUIT):
@@ -91,6 +92,7 @@ def main():
         screen.fill((214,200,170))
 
         Menu_inicial(screen)
+        screen.blit(image, (250,100))
 
         pygame.display.flip()
        
